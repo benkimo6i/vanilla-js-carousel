@@ -10,7 +10,7 @@ class Carousel {
     this.carouselArray = [...items];
   }
 
-  // Assign initial css classes for array items
+  // Assign initial css classes for gallery and nav items
   setInitialState() {
     this.carouselArray[0].classList.add('gallery-item-first');
     this.carouselArray[1].classList.add('gallery-item-previous');
@@ -101,7 +101,9 @@ class Carousel {
  
   // Add a click event listener to trigger setCurrentState method to rearrange carousel
   useControls() {
-    galleryControlsContainer.childNodes.forEach(control => {
+    const triggers = [...galleryControlsContainer.childNodes];
+
+    triggers.forEach(control => {
       control.addEventListener('click', () => {
         const target = control;
         const selectedItem = document.querySelectorAll('.gallery-item-selected');
@@ -116,11 +118,9 @@ class Carousel {
   }
 }
 
-window.addEventListener('DOMContentLoaded', (e) => {
-  const exampleCarousel = new Carousel(galleryContainer, galleryItems, galleryControls);
+const exampleCarousel = new Carousel(galleryContainer, galleryItems, galleryControls);
 
-  exampleCarousel.setControls();
-  exampleCarousel.setNav();
-  exampleCarousel.setInitialState();
-  exampleCarousel.useControls();
-});
+exampleCarousel.setControls();
+exampleCarousel.setNav();
+exampleCarousel.setInitialState();
+exampleCarousel.useControls();

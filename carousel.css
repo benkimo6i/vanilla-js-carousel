@@ -12,7 +12,6 @@
 }
 
 .gallery-item {
-  cursor: pointer;
   height: 150px;
   opacity: .4;
   position: absolute;
