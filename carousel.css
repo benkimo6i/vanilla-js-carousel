@@ -51,3 +51,23 @@
 .gallery-item-last {
   margin-left: -4%;
 }
+
+.gallery-controls {
+  display: flex;
+  justify-content: center;
+}
+
+.gallery-controls button {
+  border: 0;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0 20px;
+}
+
+.gallery-controls-previous {
+  position: relative;
+}
+
+.gallery-controls-next {
+  position: relative;
+}
