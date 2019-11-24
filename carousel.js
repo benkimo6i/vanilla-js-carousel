@@ -53,18 +53,42 @@ class Carousel {
     this.carouselControls.forEach(control => {
       control.addEventListener('click', () => {
         const selected = control;
+        const targetItem = document.querySelector('.gallery-item-selected');
+        const previousTargetItem = document.querySelector('.gallery-item-previous');
+        const nextTargetItem = document.querySelector('.gallery-item-next');
+        const firstCarouselItem = document.querySelector('.gallery-item-first');
+        const lastCarouselItem = document.querySelector('.gallery-item-last');
+
+        targetItem.classList.remove('gallery-item-selected');
+        previousTargetItem.classList.remove('gallery-item-previous');
+        nextTargetItem.classList.remove('gallery-item-next');
+        firstCarouselItem.classList.remove('gallery-item-first');
+        lastCarouselItem.classList.remove('gallery-item-last');
+
 
         if (selected.className == 'gallery-controls-previous') {
-          const [first, ...rest] = this.carouselArray;
-          this.carouselArray = [...rest, first];
+          // const [first, ...rest] = this.carouselArray;
+          // this.carouselArray = [...rest, first];
 
-          this.setCurrentState();
+          // this.setCurrentState();
+
+          targetItem.classList.add('gallery-item-next');
+          previousTargetItem.classList.add('gallery-item-selected');
+          nextTargetItem.classList.add('gallery-item-last');
+          firstCarouselItem.classList.add('gallery-item-previous');
+          lastCarouselItem.classList.add('gallery-item-first');
         } else {
-          const [last, ...rest] = this.carouselArray;
-          this.carouselArray = [...rest, last];
+          // const [last, ...rest] = this.carouselArray;
+          // this.carouselArray = [...rest, last];
 
-          this.setCurrentState();
+          // this.setCurrentState();
+          targetItem.classList.add('gallery-item-previous');
+          previousTargetItem.classList.add('gallery-item-first');
+          nextTargetItem.classList.add('gallery-item-selected');
+          firstCarouselItem.classList.add('gallery-item-last');
+          lastCarouselItem.classList.add('gallery-item-next');
         }
+
       });
     });
     
