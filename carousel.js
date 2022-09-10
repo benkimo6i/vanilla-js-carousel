@@ -28,7 +28,7 @@ class Carousel {
     ];
     this.carouselInView = [1, 2, 3, 4, 5];
     this.carouselContainer;
-
+    this.carouselPlayState;
   }
 
   mounted() {
@@ -61,12 +61,19 @@ class Carousel {
 
     this.carouselOptions.forEach((option) => {
       const btn = document.createElement('button');
+      const axSpan = document.createElement('span');
+
+      // Add accessibilty spans to button
+      axSpan.innerText = option;
+      axSpan.className = 'ax-hidden';
+      btn.append(axSpan);
+
+      // Add button attributes
+      btn.className = `carousel-control carousel-control-${option}`;
+      btn.setAttribute('data-name', option);
 
       // Add carousel control options
       controls.append(btn);
-      btn.className = `carousel-controls-${option}`;
-      btn.innerText = option;
-      btn.setAttribute('data-name', option);
     });
 
     // After rendering carousel to our DOM, setup carousel controls' event listeners
@@ -91,7 +98,7 @@ class Carousel {
     if (control === 'previous') return this.previous();
     if (control === 'next') return this.next();
     if (control === 'add') return this.add();
-    if (control === 'play') return this.add();
+    if (control === 'play') return this.play();
 
     return;
   }
@@ -138,7 +145,7 @@ class Carousel {
       'src': '',
     };
     const lastItem = this.carouselData.length;
-    const lastIndex = this.carouselData.findLastIndex(item => item.id == lastItem);
+    const lastIndex = this.carouselData.findIndex(item => item.id == lastItem);
     
     // Assign properties for new carousel item
     Object.assign(newItem, {
@@ -153,13 +160,34 @@ class Carousel {
     this.next();
   }
 
-  // play() {
+  play() {
+    const playBtn = document.querySelector('.carousel-control-play');
+    const startPlaying = () => this.next();
 
-  // }
+    if (playBtn.classList.contains('playing')) {
+      // Remove class to return to play button state/appearance
+      playBtn.classList.remove('playing');
+
+      // Remove setInterval
+      clearInterval(this.carouselPlayState); 
+      this.carouselPlayState = null; 
+    } else {
+      // Add class to change to pause button state/appearance
+      playBtn.classList.add('playing');
+
+      // First run initial next method
+      this.next();
+
+      // Use play state prop to store interval ID and run next method on a 1.5 second interval
+      this.carouselPlayState = setInterval(startPlaying, 1500);
+    };
+  }
 
 }
 
 // Refers to the carousel root element you want to target, use specific class selectors if using multiple carousels
 const el = document.querySelector('.carousel');
 // Create a new carousel object
-const exampleCarousel = new Carousel(el).mounted();
+const exampleCarousel = new Carousel(el);
+// Setup carousel and methods
+exampleCarousel.mounted();
