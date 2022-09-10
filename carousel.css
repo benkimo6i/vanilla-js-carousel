@@ -1,3 +1,10 @@
+/* page styles */
+.ax-hidden {
+  visibility: hidden;
+  position: absolute;
+}
+
+/* carousel styles */
 .carousel {
   --carousel-height: 400px;
   --carousel-width: 1000px;
@@ -10,7 +17,7 @@
 .carousel-container {
   align-items: center;
   display: flex;
-  height: var(--carousel-height);
+  min-height: var(--carousel-height);
   margin: 0 auto;
   max-width: var(--carousel-width);
   position: relative;
@@ -28,7 +35,7 @@
 
 .carousel-item-1 {
   left: 15%;
-  opacity: .4;
+  opacity: 0.4;
 }
 
 .carousel-item-2,
@@ -58,7 +65,7 @@
 
 .carousel-item-5 {
   left: 85%;
-  opacity: .4;
+  opacity: 0.4;
 }
 
 .carousel-controls {
@@ -67,62 +74,121 @@
   margin: 30px 0;
 }
 
-.carousel-controls button {
+/* carousel button styles */
+.carousel-control {  
   background-color: transparent;
-  border: 0;
+  border: 2px solid;
+  border-radius: 4px;
+  color: #aaa;
   cursor: pointer;
-  font-size: 16px;
+  height: 22px;
   margin: 0 20px;
-  padding: 0 12px;
-  text-transform: capitalize;
-}
-
-.carousel-controls button:focus {
-  outline: none;
-}
-
-.carousel-controls-previous {
   position: relative;
+  transform: scale(1.5);
+  transition: transform 0.5s ease-out;
+  width: 22px;
 }
 
-.carousel-controls-previous::before {
-  border: solid #000;
-  border-width: 0 2px 2px 0;
+.carousel-control:hover {
+  transform: scale(1.3);
+}
+
+/* previous button */
+.carousel-control-previous::after,
+.carousel-control-previous::before {
+  box-sizing: border-box; 
   content: '';
-  display: inline-block;
-  height: 4px;
-  left: -10px;
-  padding: 2px;
+  display: block;
+  height: 8px;
   position: absolute;
-  top: 0;
-  transform: rotate(135deg) translateY(-50%);
-  transition: left 0.15s ease-in-out;
-  width: 4px;
+  top: 5px
+}
+.carousel-control-previous::before {
+  background: currentColor;
+  border-radius: 2px;
+  right: 11px;
+  width: 2px;
+}
+.carousel-control-previous::after {
+  border-bottom: 4px solid transparent;
+  border-right: 5px solid;
+  border-top: 4px solid transparent;
+  right: 5px;
+  width: 0;
 }
 
-.carousel-controls-previous:hover::before {
-  left: -18px;
-}
-
-.carousel-controls-next {
-  position: relative;
-}
-
-.carousel-controls-next::before {
-  border: solid #000;
-  border-width: 0 2px 2px 0;
-  content: '';
-  display: inline-block;
-  height: 4px;
-  padding: 2px;
+/* next button */
+.carousel-control-next::after,
+.carousel-control-next::before {
+  box-sizing: border-box;
+  content: "";
+  display: block;
+  height: 8px;
   position: absolute;
-  right: -10px;
-  top: 50%;
-  transform: rotate(-45deg) translateY(-50%);
-  transition: right 0.15s ease-in-out;
-  width: 4px;
+  top: 5px
+}
+.carousel-control-next::before {
+  background: currentColor;
+  border-radius: 2px;
+  left: 11px;
+  width: 2px;
+}
+.carousel-control-next::after {
+  border-bottom: 4px solid transparent;
+  border-left: 5px solid;
+  border-top: 4px solid transparent;
+  left: 5px;
+  width: 0;
 }
 
-.carousel-controls-next:hover::before {
-  right: -18px;
+/* play button */
+.carousel-control-play::before {
+  border-bottom: 5px solid transparent;
+  border-left: 6px solid;
+  border-top: 5px solid transparent;
+  box-sizing: border-box;
+  content: "";
+  display: block;
+  height: 10px;
+  position: absolute;
+  left: 7px;
+  top: 4px;
+  width: 0;
+}
+
+/* pause button */
+.carousel-control-play.playing::before {
+  border-bottom: 0;
+  border-left: 2px solid;
+  border-right: 2px solid;
+  border-top: 0;
+  box-sizing: border-box;
+  content: "";
+  display: block;
+  height: 6px;
+  position: absolute;
+  left: 6px;
+  top: 6px; 
+  width: 6px;
+}
+
+/* add button */
+.carousel-control-add::after,
+.carousel-control-add::before {
+  background: currentColor;
+  border-radius: 5px;
+  box-sizing: border-box;
+  content: "";
+  display: block;
+  height: 2px;
+  position: absolute;
+  left: 4px;
+  top: 8px;
+  width: 10px;
+}
+.carousel-control-add::after {
+  height: 10px;
+  left: 8px;
+  top: 4px;
+  width: 2px;
 }
